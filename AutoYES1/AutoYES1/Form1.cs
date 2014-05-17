@@ -16,6 +16,7 @@ namespace AutoYES1
 {
     public partial class Form1 : Form
     {
+        // Win32 API
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr FindWindow(string strClassName, string strWindowName);
 
@@ -34,6 +35,39 @@ namespace AutoYES1
         private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
 
+
+
+
+        // kernel32 APIを使用する。
+        [DllImport("kernel32.dll")]
+        extern static ExecutionState SetThreadExecutionState(ExecutionState esFlags);
+
+        //引数のExecutionState列挙体
+        [FlagsAttribute]
+        public enum ExecutionState : uint
+        {
+            // Return value of failed.
+            Null = 0,
+
+            // Anti standby.
+            SystemRequired = 1,
+
+            // Anti Display-off
+            DisplayRequired = 2,
+
+            // continuous
+            Continuous = 0x80000000,
+        }
+
+
+
+
+
+
+
+
+
+
         int currentPointX, currentPointY; //現在のカーソルの座標
         string messageKanshichu;
 
@@ -47,6 +81,12 @@ namespace AutoYES1
 
         private void timerAutoClick_Tick(object sender, EventArgs e)
         {
+            // DisplayRequiredをSetThreadExecutionStateへ送信.(スクリーンロックを抑止)
+            ExecutionState es = new ExecutionState();
+            es = ExecutionState.DisplayRequired;
+            SetThreadExecutionState(es);
+
+
 
             // セキュリティダイアログの座標を取得
             IntPtr dialog = FindWindow("#32770", "Microsoft Office Outlook");
@@ -60,11 +100,13 @@ namespace AutoYES1
                 if (lblStatus.Text != messageKanshichu)
                 {
                     lblStatus.Text = messageKanshichu;
+                    this.BackColor = Color.White;
                 }
                 return;
             }
 
             lblStatus.Text = "ダイアログ発見\r\nクリック中！";
+            this.BackColor = Color.Yellow;
 
             //現在のカーソル位置を記憶しておく
             //currentPointX = System.Windows.Forms.Cursor.Position.X;
@@ -80,7 +122,7 @@ namespace AutoYES1
         //クリックする処理
         void doClick()
         {
-            //[System.Runtime.InteropServices.DllImport("USER32.DLL")]
+            
             int MOUSEEVENTF_LEFTDOWN = 0x2;
             int MOUSEEVENTF_LEFTUP = 0x4;
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
