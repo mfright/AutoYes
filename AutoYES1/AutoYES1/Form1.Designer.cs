@@ -34,6 +34,8 @@
             this.timerAutoClick = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timerAutolockCancel = new System.Windows.Forms.Timer(this.components);
+            this.timerDelayClick = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,17 +59,28 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 84);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 85);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(250, 23);
+            this.statusStrip1.Size = new System.Drawing.Size(250, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 18);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(117, 17);
             this.toolStripStatusLabel1.Text = "LEFT:     TOP:       ";
+            // 
+            // timerAutolockCancel
+            // 
+            this.timerAutolockCancel.Enabled = true;
+            this.timerAutolockCancel.Interval = 50000;
+            this.timerAutolockCancel.Tick += new System.EventHandler(this.timerAutolockCancel_Tick);
+            // 
+            // timerDelayClick
+            // 
+            this.timerDelayClick.Interval = 1000;
+            this.timerDelayClick.Tick += new System.EventHandler(this.timerDelayClick_Tick);
             // 
             // Form1
             // 
@@ -81,7 +94,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Outlook自動「はい」選択";
+            this.Text = "自動「はい」選択";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -95,6 +108,8 @@
         private System.Windows.Forms.Timer timerAutoClick;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Timer timerAutolockCancel;
+        private System.Windows.Forms.Timer timerDelayClick;
     }
 }
 

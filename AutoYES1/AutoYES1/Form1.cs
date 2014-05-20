@@ -35,6 +35,9 @@ namespace AutoYES1
         private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
 
 
@@ -59,7 +62,7 @@ namespace AutoYES1
             Continuous = 0x80000000,
         }
 
-
+        public int dialogLeft=0, dialogTop = 0;
 
 
 
@@ -81,13 +84,7 @@ namespace AutoYES1
 
         private void timerAutoClick_Tick(object sender, EventArgs e)
         {
-            // DisplayRequiredをSetThreadExecutionStateへ送信.(スクリーンロックを抑止)
-            ExecutionState es = new ExecutionState();
-            es = ExecutionState.DisplayRequired;
-            SetThreadExecutionState(es);
-
-
-
+         
             // セキュリティダイアログの座標を取得
             IntPtr dialog = FindWindow("#32770", "Microsoft Office Outlook");
             Rect dialogRect = new Rect();
@@ -108,14 +105,54 @@ namespace AutoYES1
             lblStatus.Text = "ダイアログ発見\r\nクリック中！";
             this.BackColor = Color.Yellow;
 
-            //現在のカーソル位置を記憶しておく
-            //currentPointX = System.Windows.Forms.Cursor.Position.X;
-            //currentPointY = System.Windows.Forms.Cursor.Position.Y;
+            // Outlookをアクティブにする
+            activateOutlook();
+
 
             //カーソルを"はい"ボタン上まで移動させ、クリックする
-            setPoint(dialogRect.Left + 116, dialogRect.Top + 156);
-            doClick();
+            //setPoint(dialogRect.Left + 116, dialogRect.Top + 156);
+            //doClick();
+            //doClick();
 
+            dialogLeft = dialogRect.Left;
+            dialogTop = dialogRect.Top;
+            timerDelayClick.Start();
+
+        }
+
+
+        void activateOutlook()
+        {
+
+            try
+            {
+                /*
+                // VisualBasic.dll
+                System.Diagnostics.Process[] ps = System.Diagnostics.Process.GetProcessesByName("Outlook");
+                if (0 < ps.Length)
+                {
+                    Microsoft.VisualBasic.Interaction.AppActivate(ps[0].Id);
+                }
+                */
+
+                //user32.dll
+                foreach (System.Diagnostics.Process p
+                    in System.Diagnostics.Process.GetProcesses())
+                {
+                    //"Outlook"がメインウィンドウのタイトルに含まれているか調べる
+                    if (0 <= p.MainWindowTitle.IndexOf("Outlook"))
+                    {
+                        //ウィンドウをアクティブにする
+                        SetForegroundWindow(p.MainWindowHandle);
+                        break;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -133,6 +170,27 @@ namespace AutoYES1
         void setPoint(int newX, int newY)
         {
             System.Windows.Forms.Cursor.Position = new System.Drawing.Point(newX, newY);
+        }
+
+
+
+
+        // 画面ロックを50秒ごとに抑止する
+        private void timerAutolockCancel_Tick(object sender, EventArgs e)
+        {
+            // DisplayRequiredをSetThreadExecutionStateへ送信.(スクリーンロックを抑止)
+            ExecutionState es = new ExecutionState();
+            es = ExecutionState.DisplayRequired;
+            SetThreadExecutionState(es);
+        }
+
+        private void timerDelayClick_Tick(object sender, EventArgs e)
+        {
+            setPoint(dialogLeft + 116, dialogTop + 156);
+            doClick();
+            doClick();
+
+            timerDelayClick.Stop();
         }
         
     }
