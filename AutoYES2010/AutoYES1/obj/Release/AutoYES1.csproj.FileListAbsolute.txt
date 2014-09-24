@@ -1,0 +1,9 @@
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\bin\Release\AutoYES2010.exe.config
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\bin\Release\AutoYES2010.exe
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\bin\Release\AutoYES2010.pdb
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\obj\Release\AutoYES1.Form1.resources
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\obj\Release\AutoYES1.Properties.Resources.resources
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\obj\Release\AutoYES1.csproj.GenerateResource.Cache
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\obj\Release\AutoYES2010.exe
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\obj\Release\AutoYES2010.pdb
+C:\Users\_\Documents\GitHub\AutoYes\AutoYES2010\AutoYES1\obj\Release\AutoYES1.csprojResolveAssemblyReference.cache

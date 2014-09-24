@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoYES1", "AutoYES1\AutoYES1.csproj", "{33ECABF4-3733-4A9A-A396-82DAD024844F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33ECABF4-3733-4A9A-A396-82DAD024844F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33ECABF4-3733-4A9A-A396-82DAD024844F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33ECABF4-3733-4A9A-A396-82DAD024844F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33ECABF4-3733-4A9A-A396-82DAD024844F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
