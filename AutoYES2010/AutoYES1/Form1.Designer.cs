@@ -96,6 +96,7 @@
             this.Name = "Form1";
             this.Opacity = 0.75D;
             this.Text = "自動「はい」選択";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

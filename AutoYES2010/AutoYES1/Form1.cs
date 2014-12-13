@@ -257,5 +257,13 @@ namespace AutoYES1
             public int windowHigh = 0;
             public int windowMargin = 0;
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("終了してもよろしいですか？　自動で「はい」をクリックできなくなります。", "確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
